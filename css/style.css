@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Single+Ink:wght@100..900&display=swap');
-*{
+
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     user-select: none;
 }
-html,body{
+
+html, body {
     height: 100%;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     background: radial-gradient(1200px 800px at 10% 10%, rgba(10,20,40,0.18), transparent 10%),
@@ -17,10 +19,11 @@ html,body{
     justify-content: center;
     align-items: center;
     padding: 3vmin;
+    touch-action: manipulation; /* prevent zoom/pinch */
 }
 
 /* board container */
-#board{
+#board {
     background: linear-gradient(180deg, rgba(20,20,20,0.95), rgba(18,18,18,0.96));
     width: 90vmin;
     height: 92vmin;
@@ -34,11 +37,12 @@ html,body{
     position: relative;
     overflow: hidden;
     outline: none;
-    
+    max-width: 96vmin;
+    max-height: 96vmin;
 }
 
 /* subtle grid overlay for depth */
-#board::after{
+#board::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -50,7 +54,7 @@ html,body{
 }
 
 /* snake head with eyes */
-.head{
+.head {
     background: radial-gradient(circle at 30% 30%, #6efc3a 0%, #39b21a 45%, #1f6f0f 100%);
     border-radius: 40% 40% 35% 35%;
     box-shadow: 0 6px 14px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.03) inset;
@@ -59,9 +63,8 @@ html,body{
     position: relative;
 }
 
-/* eyes on head using pseudo elements */
-.head::before,
-.head::after{
+/* eyes on head */
+.head::before, .head::after {
     content: "";
     position: absolute;
     width: 1.2vmin;
@@ -71,55 +74,53 @@ html,body{
     top: 28%;
     box-shadow: 0 0 0.25vmin rgba(0,0,0,0.35);
 }
-.head::before{ left: 22%; transform: translateX(-50%); }
-.head::after{ right: 22%; transform: translateX(50%); }
+.head::before { left: 22%; transform: translateX(-50%); }
+.head::after { right: 22%; transform: translateX(50%); }
 
-/* snake body segments - smoother, glossy */
-.snake{
+/* snake body segments */
+.snake {
     background: linear-gradient(180deg, rgba(12,130,41,0.95), rgba(5,70,20,0.95));
     border-radius: 30%;
     box-shadow: 0 6px 12px rgba(2,6,10,0.6);
     transform-origin: center;
     transition: transform 120ms linear;
+    animation: segmentPulse 1.6s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 40ms);
 }
-
-/* subtle ripple effect for snake body */
 @keyframes segmentPulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.02); }
     100% { transform: scale(1); }
 }
-.snake { animation: segmentPulse 1.6s ease-in-out infinite; animation-delay: calc(var(--i) * 40ms); }
 
-/* food - vibrant and pulsing */
-.food{
+/* food */
+.food {
     background: radial-gradient(circle at 30% 30%, #fff 0%, #ff4646 35%, #c71b1b 100%);
     border-radius: 50%;
     box-shadow: 0 6px 18px rgba(200,30,30,0.32), 0 1px 0 rgba(255,255,255,0.08) inset;
     width: 100%;
     height: 100%;
     transform-origin: center;
-    
+    animation: foodPulse 1.4s ease-in-out infinite;
 }
-
-/* food pulse */
 @keyframes foodPulse {
     0% { transform: scale(1); filter: saturate(1); }
     50% { transform: scale(1.12); filter: saturate(1.14); }
     100% { transform: scale(1); filter: saturate(1); }
 }
 
-/* small responsive tweak */
-@media (max-width: 600px){
-    #board { width: 96vmin; height: 98vmin; }
-    .head::before, .head::after { width: 1.6vmin; height: 1.6vmin; }
-}
-#scoreBox{
+/* score box */
+#scoreBox {
     position: absolute;
     top: 9px;
     right: 200px;
     font-size: 35px;
     font-weight: bolder;
     font-family: "Bitcount Single Ink", system-ui;
-   
+}
+
+/* small responsive tweak */
+@media (max-width: 600px){
+    #board { width: 96vmin; height: 98vmin; }
+    .head::before, .head::after { width: 1.8vmin; height: 1.8vmin; }
 }
