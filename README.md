@@ -24,3 +24,4 @@ Interactive sound effects: food, move, and game over
 
 Polished visuals using CSS gradients, shadows, and grid layouts
 
+<img width="1697" height="856" alt="Screenshot 2025-10-04 111331" src="https://github.com/user-attachments/assets/3a2d3b12-c69b-4549-a7e6-e4c43604c230" />
