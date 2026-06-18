@@ -1,4 +1,5 @@
 # snake-raider🐍
+deploy here - https://soumyap404.github.io/snake-raider-2.0/
 
 Snake Raider is a modern, desktop-only version of the classic Snake game. Navigate the snake to eat food, grow longer, and avoid collisions with walls or yourself. It’s a fun project that demonstrates game logic, animations, and interactive sound effects using vanilla web technologies.
 
